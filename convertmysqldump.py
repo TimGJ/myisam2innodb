@@ -95,7 +95,7 @@ def ProcessFiles(infile, outfile, excluded):
         if foundtable:
             table   = foundtable.groups()[1]
             isexcluded = database.upper() in excluded
-            logging.info('Line {:,}: Found table {:})'.format(
+            logging.info('Line {:,}: Found table {:}'.format(
                     n+1, table))
             
         if not isexcluded and myisam_re.search(line):
