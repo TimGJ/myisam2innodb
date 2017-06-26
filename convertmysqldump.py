@@ -21,8 +21,6 @@ import argparse
 import os.path
 import sys
 import re
-import enum
-
 
 def ProcessArguments():
     """
@@ -32,6 +30,7 @@ def ProcessArguments():
     parser = argparse.ArgumentParser(description='Convert MySQLdump MyISAM tables to InnoDB')
     parser.add_argument('--verbose', help='Verbose output', action='store_true')
     parser.add_argument('--force',   help='Overwrite existing output file', action = 'store_true')
+    parser.add_argument('--encoding',help='Character encoding scheme', default = 'utf-8')
     parser.add_argument('input',     help='Input MySQLdump file')
     parser.add_argument('output',    help='Output MySQLdump file')
     try:
@@ -112,7 +111,7 @@ if __name__ == '__main__':
         logging.error('File {} already exists. (Use the --force option, Luke)'.format(
                 args.output))
     else:
-        with open(args.input) as infile, open(args.output, 'w') as outfile:
+        with open(args.input, args.encoding = encoding) as infile, open(args.output, 'w', encoding = args.encoding) as outfile:
             logging.debug('Opened {} for reading'.format(args.input))
             logging.debug('Opened {} for writing'.format(args.output))
             ProcessFiles(infile, outfile, [e.upper() for e in excluded])
