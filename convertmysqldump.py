@@ -111,7 +111,7 @@ if __name__ == '__main__':
         logging.error('File {} already exists. (Use the --force option, Luke)'.format(
                 args.output))
     else:
-        with open(args.input, args.encoding = encoding) as infile, open(args.output, 'w', encoding = args.encoding) as outfile:
+        with open(args.input, encoding = args.encoding) as infile, open(args.output, 'w', encoding = args.encoding) as outfile:
             logging.debug('Opened {} for reading'.format(args.input))
             logging.debug('Opened {} for writing'.format(args.output))
             ProcessFiles(infile, outfile, [e.upper() for e in excluded])
