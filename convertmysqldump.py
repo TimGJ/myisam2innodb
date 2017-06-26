@@ -14,17 +14,6 @@ The reason we can't use (say) a very simple sed script
 is that although we may wish to convert our own tables from
 MyISAM to InnoDB there are some tables in the default
 MySQL schema which we should leave well alone.
-
-Because there is no guarantee of the format of the 
-MySQLdump file and because (for reasons of memory)
-we can only go forwards through it line by line, 
-each line is subject to a number of case-insensitive 
-reguluar expression searches. This makes the script 
-tediously slow on large dumpfiles, and so it is probably
-best run in batch mode (for which it is designed).
-
-(Operationally, the master database would only have to
-be offline whilst the MySQLdump operation was completed)
 """
 
 import logging
@@ -44,7 +33,7 @@ def ProcessArguments():
     parser.add_argument('--verbose', help='Verbose output', action='store_true')
     parser.add_argument('--force',   help='Overwrite existing output file', action = 'store_true')
     parser.add_argument('input',     help='Input MySQLdump file')
-    parser.add_argument('output',    help='Input MySQLdump file')
+    parser.add_argument('output',    help='Output MySQLdump file')
     try:
         args = parser.parse_args()
     except SystemExit:
